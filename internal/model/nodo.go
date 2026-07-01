@@ -1,3 +1,13 @@
-package model
+package grafo
 
-// TODO: definir struct Nodo (equivalente a Nodo.java)
+// Nodo representa un vértice del grafo.
+type Nodo struct {
+	Nombre string
+}
+
+// Constructor
+func NuevoNodo(nombre string) *Nodo {
+	return &Nodo{
+		Nombre: nombre,
+	}
+}

@@ -1,3 +1,15 @@
-package model
+package grafo
 
-// TODO: definir struct Arista (equivalente a Arista.java)
+// Arista representa una conexión hacia otro nodo.
+type Arista struct {
+	Destino *Nodo
+	Peso    int
+}
+
+// Constructor
+func NuevaArista(destino *Nodo, peso int) Arista {
+	return Arista{
+		Destino: destino,
+		Peso:    peso,
+	}
+}	
