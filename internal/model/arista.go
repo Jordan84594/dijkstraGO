@@ -1,5 +1,6 @@
 package model
 
+// TODO: definir struct Arista (equivalente a Arista.java)
 // Arista representa una conexión ponderada hacia un nodo destino
 // (equivalente a Arista.java).
 //

@@ -1,5 +1,7 @@
 package model
 
+// TODO: definir struct Nodo (equivalente a Nodo.java)
+
 // Nodo representa un vértice del grafo (equivalente a Nodo.java).
 // En Go no hace falta equals()/hashCode(): un struct con campos
 // comparables (como string) ya funciona automáticamente como clave de map.

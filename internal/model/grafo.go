@@ -1,5 +1,6 @@
 package model
 
+// TODO: definir struct Grafo y sus métodos (equivalente a Grafo.java)
 // Grafo representa un grafo no dirigido mediante lista de adyacencia
 // (equivalente a Grafo.java)
 type Grafo struct {
