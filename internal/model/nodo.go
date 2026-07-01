@@ -1,13 +1,17 @@
-package grafo
+package model
 
-// Nodo representa un vértice del grafo.
+// Nodo representa un vértice del grafo (equivalente a Nodo.java).
+// En Go no hace falta equals()/hashCode(): un struct con campos
+// comparables (como string) ya funciona automáticamente como clave de map.
 type Nodo struct {
 	Nombre string
 }
 
-// Constructor
-func NuevoNodo(nombre string) *Nodo {
-	return &Nodo{
-		Nombre: nombre,
-	}
+// NuevoNodo crea un nodo nuevo (equivalente al constructor Nodo(String))
+func NuevoNodo(nombre string) Nodo {
+	return Nodo{Nombre: nombre}
+}
+
+func (n Nodo) String() string {
+	return n.Nombre
 }

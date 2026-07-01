@@ -1,15 +1,20 @@
-package grafo
+package model
 
-// Arista representa una conexión hacia otro nodo.
+// Arista representa una conexión ponderada hacia un nodo destino
+// (equivalente a Arista.java).
+//
+// Nota: aquí Destino es un Nodo por VALOR, no un puntero. Como Nodo
+// ya es comparable por valor (su Nombre), no necesitamos punteros
+// para identificarlo — simplifica el código frente al Java original.
 type Arista struct {
-	Destino *Nodo
+	Destino Nodo
 	Peso    int
 }
 
-// Constructor
-func NuevaArista(destino *Nodo, peso int) Arista {
-	return Arista{
-		Destino: destino,
-		Peso:    peso,
-	}
-}	
+func NuevaArista(destino Nodo, peso int) Arista {
+	return Arista{Destino: destino, Peso: peso}
+}
+
+func (a Arista) String() string {
+	return a.Destino.Nombre
+}
