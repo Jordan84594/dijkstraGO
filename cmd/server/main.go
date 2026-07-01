@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
@@ -9,7 +10,19 @@ import (
 )
 
 func main() {
-	tmpl := template.Must(template.ParseGlob("web/templates/*.html"))
+	funcMap := template.FuncMap{
+		"json": func(v any) template.JS {
+			b, err := json.Marshal(v)
+			if err != nil {
+				return template.JS("null")
+			}
+			return template.JS(b)
+		},
+	}
+
+	tmpl := template.Must(
+		template.New("").Funcs(funcMap).ParseGlob("web/templates/*.html"),
+	)
 	h := handler.NuevoGrafoHandler(tmpl)
 
 	mux := http.NewServeMux()

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Algoritmo de Dijkstra</title>
+<link rel="stylesheet" href="/static/css/estilos.css">
+</head>
+<body>
+
+<div class="contenedor">
+
+    <!-- Panel izquierdo -->
+    <div class="sidebar">
+
+        <h2>Algoritmo de Dijkstra</h2>
+
+        <!-- Agregar nodo -->
+        <div class="card">
+            <form action="/agregar-nodo" method="post">
+                <label>Nombre del nodo</label>
+                <input type="text" name="nombre" placeholder="Ejemplo: A">
+
+                <button type="submit">Agregar Nodo</button>
+            </form>
+        </div>
+
+        <!-- Renombrar nodo -->
+        <div class="card">
+            <h3>Renombrar nodo</h3>
+            <p class="ayuda">Haz clic derecho en un nodo del grafo para eliminarlo, o usa este formulario para renombrarlo.</p>
+            <form action="/renombrar-nodo" method="post">
+                <label>Nombre actual</label>
+                <input type="text" name="nombreActual" placeholder="Ejemplo: A" required>
+                <label>Nuevo nombre</label>
+                <input type="text" name="nuevoNombre" placeholder="Ejemplo: Z" required>
+                <button type="submit">Renombrar</button>
+            </form>
+        </div>
+
+        <!-- Agregar conexión -->
+        <div class="card">
+            <h3>Agregar Conexión</h3>
+            <form action="/agregar-arista" method="post">
+                <label>Nodo Origen</label>
+                <select name="origen" required>
+                    <option value="">Selecciona un nodo</option>
+                    {{range .Nodos}}
+                    <option value="{{.}}">{{.}}</option>
+                    {{end}}
+                </select>
+
+                <label>Nodo Destino</label>
+                <select name="destino" required>
+                    <option value="">Selecciona un nodo</option>
+                    {{range .Nodos}}
+                    <option value="{{.}}">{{.}}</option>
+                    {{end}}
+                </select>
+
+                <label>Peso</label>
+                <input type="number" name="peso" min="1" placeholder="Ejemplo: 5" required>
+
+                <button type="submit">Agregar Conexión</button>
+            </form>
+        </div>
+
+        <!-- Calcular camino -->
+        <div class="card">
+            <h3>Calcular Camino</h3>
+            <form action="/calcular" method="post">
+                <label>Nodo Inicial</label>
+                <select name="inicio" required>
+                    <option value="">Selecciona un nodo</option>
+                    {{range .Nodos}}
+                    <option value="{{.}}">{{.}}</option>
+                    {{end}}
+                </select>
+
+                <label>Nodo Destino</label>
+                <select name="fin" required>
+                    <option value="">Selecciona un nodo</option>
+                    {{range .Nodos}}
+                    <option value="{{.}}">{{.}}</option>
+                    {{end}}
+                </select>
+
+                <button type="submit">Calcular Camino</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Área de dibujo -->
+    <div class="grafo">
+        <div id="nodeMenu" class="node-menu">
+            <button type="button" data-action="delete">Eliminar nodo</button>
+        </div>
+        <canvas id="canvas"></canvas>
+    </div>
+
+</div>
+
+{{if .Mensaje}}
+<div id="toast" class="toast">
+    <span>{{.Mensaje}}</span>
+</div>
+{{end}}
+
+{{if .MostrarModalResultado}}
+<div class="modal-backdrop">
+    <div class="modal-card">
+        <h3>Resultado del camino</h3>
+        <p><strong>Inicio:</strong> <span>{{.Inicio}}</span></p>
+        <p><strong>Destino:</strong> <span>{{.Fin}}</span></p>
+        <p><strong>Camino:</strong> <span>{{.Camino}}</span></p>
+        <p><strong>Distancia:</strong> <span>{{.Distancia}}</span></p>
+        <form action="/" method="get">
+            <button type="submit">Cerrar</button>
+        </form>
+    </div>
+</div>
+{{end}}
+
+<script id="grafo-data" type="application/json">
+{"nodos": {{.Nodos | json}}, "aristas": {{.Aristas | json}}}
+</script>
+
+<script src="/static/js/app.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var datos = JSON.parse(document.getElementById('grafo-data').textContent);
+        initGrafo(datos.nodos, datos.aristas);
+
+        var toast = document.getElementById('toast');
+        if (toast) {
+            setTimeout(function () { toast.style.display = 'none'; }, 3500);
+        }
+    });
+</script>
+
+</body>
+</html>
