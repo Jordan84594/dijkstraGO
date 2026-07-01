@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dijkstra en Go
 
 Migración del proyecto "Algoritmo de Dijkstra en Java" (Spring Boot + Thymeleaf) a Go.
@@ -14,3 +15,6 @@ Migración del proyecto "Algoritmo de Dijkstra en Java" (Spring Boot + Thymeleaf
 ## Ejecutar (una vez implementado)
 
     go run ./cmd/server
+=======
+# dijkstraGO
+>>>>>>> 292cc2da5806647b32e294f7f0c08d9b95e5d7b3
