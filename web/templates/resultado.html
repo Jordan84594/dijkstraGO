@@ -1,0 +1,46 @@
+<!-- NOTA: el handler Go (grafo_handler.go) nunca invoca esta plantilla;
+     igual que en el controlador Java original, todo se resuelve sobre
+     "index.html" (allí se muestra el modal de resultado). Se deja esta
+     página lista por si en el futuro se prefiere una vista de resultado
+     separada en lugar del modal. -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Resultado</title>
+<link rel="stylesheet" href="/static/css/estilos.css">
+<style>
+    body { display: flex; align-items: center; justify-content: center; }
+    .resultado-card {
+        width: 420px;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px gray;
+    }
+    .resultado-card h1 { text-align: center; color: #1d3557; margin-bottom: 15px; }
+    .resultado-card .dato { font-size: 18px; margin: 12px 0; }
+    .resultado-card a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        text-decoration: none;
+        background: #1d3557;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .resultado-card a:hover { background: #457b9d; }
+</style>
+</head>
+<body>
+<div class="resultado-card">
+    <h1>Resultado del Algoritmo</h1>
+    <p class="dato"><b>Nodo Inicial:</b> <span>{{.Inicio}}</span></p>
+    <p class="dato"><b>Nodo Destino:</b> <span>{{.Fin}}</span></p>
+    <p class="dato"><b>Camino más corto:</b> <span>{{.Camino}}</span></p>
+    <p class="dato"><b>Distancia Total:</b> <span>{{.Distancia}}</span></p>
+    <a href="/">Volver</a>
+</div>
+</body>
+</html>
